@@ -1,0 +1,105 @@
+/* Fondo general animado y colorido */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e53d9 0%, #1874d0 25%, #cc0d95 50%, #a1c4fd 75%, #c2ffd8 100%);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animación de fondo */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Contenedor del formulario */
+.registro-container {
+    background-color: #ffffffdd;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    width: 420px;
+    backdrop-filter: blur(6px);
+    animation: fadeIn 0.6s ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+.registro-container:hover {
+    transform: scale(1.01);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 26px;
+    position: relative;
+}
+
+h2::before {
+    content: "🎓";
+    font-size: 24px;
+    position: absolute;
+    left: -35px;
+    top: 2px;
+}
+
+/* Etiquetas */
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #444;
+    font-size: 15px;
+}
+
+/* Entradas */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1.5px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+select:focus {
+    border-color: #7f7fd5;
+    box-shadow: 0 0 5px rgba(127, 127, 213, 0.4);
+    outline: none;
+}
+
+/* Botón */
+button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    background: linear-gradient(to right, #5a67d8, #6b46c1);
+    transform: translateY(-1px);
+}
