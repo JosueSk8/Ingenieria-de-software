@@ -26,8 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Verificamos la respuesta del servidor
             if (res.ok) {
+                const data = await res.json();  // Esperamos la respuesta del servidor
+                const studentId = data.id;  // Obtenemos el ID del nuevo estudiante
+
                 alert('Estudiante registrado exitosamente.');
-                form.reset();  // Limpiamos el formulario
+
+                // Redirigimos a la página del perfil del estudiante
+                window.location.href = `../html/Estudiante/perfil.html?id=${studentId}`;
+
             } else {
                 alert('Error al registrar el estudiante.');
             }
@@ -37,3 +43,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+

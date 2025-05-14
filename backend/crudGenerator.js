@@ -4,17 +4,46 @@ function generarRutasCRUD(app, db, nombreColeccion) {
     // Ruta para obtener todos los documentos de la colección
     app.get(`/${nombreColeccion}`, (req, res) => {
         db.collection(nombreColeccion).find().toArray()
-            .then(datos => res.send(datos))
+            .then(datos => res.json(datos))
             .catch(err => {
                 console.error(err);
                 res.status(500).send(`Error al obtener ${nombreColeccion}`);
             });
     });
 
+    // ✅ Ruta para obtener un documento por ID (necesaria para ver el perfil)
+    app.get(`/${nombreColeccion}/:id`, async (req, res) => {
+        const id = req.params.id;
+
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send('ID inválido');
+        }
+
+        try {
+            const documento = await db.collection(nombreColeccion).findOne({ _id: new ObjectId(id) });
+
+            if (!documento) {
+                return res.status(404).send(`${nombreColeccion} no encontrado`);
+            }
+
+            res.json(documento);
+        } catch (err) {
+            console.error(err);
+            res.status(500).send(`Error al obtener ${nombreColeccion}`);
+        }
+    });
+
     // Ruta para crear un nuevo documento en la colección
     app.post(`/${nombreColeccion}/create`, (req, res) => {
-        db.collection(nombreColeccion).insertOne(req.body)
-            .then(() => res.send(`Nuevo ${nombreColeccion} creado`))
+        const nuevoDocumento = req.body;
+
+        db.collection(nombreColeccion).insertOne(nuevoDocumento)
+            .then(result => {
+                res.status(201).json({
+                    message: `Nuevo ${nombreColeccion} creado`,
+                    id: result.insertedId
+                });
+            })
             .catch(err => {
                 console.error(err);
                 res.status(500).send(`Error al crear ${nombreColeccion}`);
@@ -26,16 +55,19 @@ function generarRutasCRUD(app, db, nombreColeccion) {
         const id = req.params.id;
         const nuevosDatos = req.body;
 
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send('ID inválido');
+        }
+
         db.collection(nombreColeccion).updateOne(
             { _id: new ObjectId(id) },
             { $set: nuevosDatos }
         )
             .then(resultado => {
                 if (resultado.matchedCount === 0) {
-                    res.status(404).send(`${nombreColeccion} no encontrado`);
-                } else {
-                    res.send(`${nombreColeccion} actualizado`);
+                    return res.status(404).send(`${nombreColeccion} no encontrado`);
                 }
+                res.send(`${nombreColeccion} actualizado con éxito`);
             })
             .catch(err => {
                 console.error(err);
@@ -47,13 +79,16 @@ function generarRutasCRUD(app, db, nombreColeccion) {
     app.delete(`/${nombreColeccion}/:id`, (req, res) => {
         const id = req.params.id;
 
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send('ID inválido');
+        }
+
         db.collection(nombreColeccion).deleteOne({ _id: new ObjectId(id) })
             .then(resultado => {
                 if (resultado.deletedCount === 0) {
-                    res.status(404).send(`${nombreColeccion} no encontrado`);
-                } else {
-                    res.send(`${nombreColeccion} eliminado`);
+                    return res.status(404).send(`${nombreColeccion} no encontrado`);
                 }
+                res.send(`${nombreColeccion} eliminado con éxito`);
             })
             .catch(err => {
                 console.error(err);
