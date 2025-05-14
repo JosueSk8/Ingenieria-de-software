@@ -4,26 +4,29 @@
     <meta charset="UTF-8">
     <title>Perfil del Estudiante</title>
     <script defer src="../../js/perfil_estudiante.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .perfil-container {
-            margin: 30px;
-        }
-        h2 {
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/perfil_estudiante.css">
+
 </head>
 <body>
 
+<!-- Barra de navegación -->
+<div class="navbar">
+    <h1>Perfil estudiante</h1>
+    <a href ="#">Inicio</a>
+    <a href ="#">Expos</a>
+    <a href ="#">Configuracion</a>
+    <button class="logout-btn" onclick="cerrarSesion()">Cerrar sesión</button>
+</div>
+
+<!-- Contenido del perfil -->
 <div class="perfil-container">
     <h2>Perfil del Estudiante</h2>
     <div id="perfil">
         <p>Cargando perfil...</p>
     </div>
 </div>
+
+
 
 </body>
 </html>

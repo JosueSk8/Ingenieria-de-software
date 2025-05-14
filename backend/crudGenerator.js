@@ -33,6 +33,26 @@ function generarRutasCRUD(app, db, nombreColeccion) {
         }
     });
 
+    // Agrega esto donde ya tienes configurado `express`, `body-parser` y `db`
+    app.post('/login', async (req, res) => {
+        const { correo, contrasena } = req.body;
+
+        try {
+            const estudiante = await db.collection('estudiantes').findOne({ correo, contrasena });
+
+            if (!estudiante) {
+                return res.status(401).json({ mensaje: 'Credenciales inválidas' });
+            }
+
+            // En lugar de sesiones, redirigimos con el ID en la URL
+            res.json({ id: estudiante._id });
+        } catch (error) {
+            console.error("Error en login:", error);
+            res.status(500).send("Error en el servidor");
+        }
+    });
+
+
     // Ruta para crear un nuevo documento en la colección
     app.post(`/${nombreColeccion}/create`, (req, res) => {
         const nuevoDocumento = req.body;

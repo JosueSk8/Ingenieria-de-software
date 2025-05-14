@@ -27,3 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("perfil").innerText = "Error al cargar el perfil.";
         });
 });
+function cerrarSesion() {
+
+    window.location.href = "../index.html";
+}
+
