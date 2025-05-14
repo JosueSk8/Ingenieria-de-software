@@ -16,12 +16,7 @@ conexionDB()
         // Crear las rutas CRUD para cada colección
         generarRutasCRUD(app, db, 'estudiantes');
         generarRutasCRUD(app, db, 'profesores');
-        generarRutasCRUD(app, db, 'evaluadores');
-        generarRutasCRUD(app, db, 'equipos');
-        generarRutasCRUD(app, db, 'proyectos');
-        generarRutasCRUD(app, db, 'stands');
-        generarRutasCRUD(app, db, 'eventos');
-        generarRutasCRUD(app, db, 'administradores');
+        generarRutasCRUD(app,db,'evaluadores');
 
         // Iniciar el servidor
         app.listen(puerto, () => {
