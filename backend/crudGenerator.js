@@ -11,7 +11,7 @@ function generarRutasCRUD(app, db, nombreColeccion) {
             });
     });
 
-    // ✅ Ruta para obtener un documento por ID (necesaria para ver el perfil)
+    //  Ruta para obtener un documento por ID (necesaria para ver el perfil)
     app.get(`/${nombreColeccion}/:id`, async (req, res) => {
         const id = req.params.id;
 
@@ -34,28 +34,31 @@ function generarRutasCRUD(app, db, nombreColeccion) {
     });
 
     app.post('/login', async (req, res) => {
-        const { correo, contrasena } = req.body;
+        const correo = req.body.correo?.trim().toLowerCase();
+        const contrasena = req.body.contrasena?.trim();
 
         try {
-            // Buscar en estudiantes
-            const estudiante = await db.collection('estudiantes').findOne({ correo, contrasena });
-            if (estudiante) {
-                return res.json({ id: estudiante._id, tipo: 'estudiante' });
+            const colecciones = [
+                { nombre: 'estudiantes', tipo: 'estudiante' },
+                { nombre: 'profesores', tipo: 'profesor' },
+                { nombre: 'evaluadores', tipo: 'evaluador' },
+                { nombre: 'administradores', tipo: 'administrador' }
+            ];
+
+            for (const coleccion of colecciones) {
+                const usuario = await db.collection(coleccion.nombre).findOne({ correo, contrasena });
+                if (usuario) {
+                    return res.json({ id: usuario._id, tipo: coleccion.tipo });
+                }
             }
 
-            // Buscar en profesores
-            const profesor = await db.collection('profesores').findOne({ correo, contrasena });
-            if (profesor) {
-                return res.json({ id: profesor._id, tipo: 'profesor' });
-            }
-
-            // Si no se encuentra en ninguna colección
             res.status(401).json({ mensaje: 'Correo o contraseña incorrectos' });
         } catch (error) {
             console.error("Error en login:", error);
             res.status(500).send("Error en el servidor");
         }
     });
+
 
 
 

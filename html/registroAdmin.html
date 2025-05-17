@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Administrador</title>
+
+
+</head>
+<body>
+
+<div class="registro-container">
+    <h2>Registro de Administrador</h2>
+    <form action="/registro_administrador" method="POST">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+
+        <button type="submit">Registrarse</button>
+    </form>
+</div>
+
+<script src="../js/administrador/registro_admin.js"></script>
+
+</body>
+</html>

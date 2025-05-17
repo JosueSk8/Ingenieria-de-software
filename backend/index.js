@@ -17,6 +17,7 @@ conexionDB()
         generarRutasCRUD(app, db, 'estudiantes');
         generarRutasCRUD(app, db, 'profesores');
         generarRutasCRUD(app,db,'evaluadores');
+        generarRutasCRUD(app,db,'administradores');
 
         // Iniciar el servidor
         app.listen(puerto, () => {

@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Estudiante registrado exitosamente.');
 
                 // Redirigimos a la página del perfil del estudiante
-                window.location.href = `../html/Estudiante/perfil.html?id=${studentId}`;
+                window.location.href = `../../html/Estudiante/perfil.html`;
 
             } else {
                 alert('Error al registrar el estudiante.');
