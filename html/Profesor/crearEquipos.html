@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Crear Equipos</title>
+    <meta charset="UTF-8" />
+    <title>Crear Equipo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../../css/perfil_profesor.css" />
+    <script defer src="../../js/profesores/crearEquipos.js"></script>
 </head>
 <body>
+
+<!-- Barra lateral -->
+<nav class="sidebar">
+    <div class="logo">
+        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+        <span>Perfil Profesor</span>
+    </div>
+    <ul>
+        <li><a href="crearEquipos.html"><i class="fas fa-users"></i><span>Crear Equipos</span></a></li>
+        <li><a href="administrarEquipos.html"><i class="fas fa-tasks"></i><span>Administrar Equipos</span></a></li>
+    </ul>
+    <button class="logout" onclick="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+    </button>
+</nav>
+
+<!-- Contenido principal -->
+<main class="contenido">
+    <h1><i class="fas fa-users"></i> Crear Nuevo Equipo</h1>
+    <div class="perfil-container">
+        <form id="formEquipo">
+            <label for="nombreEquipo">Nombre del equipo:</label>
+            <input type="text" id="nombreEquipo" name="nombreEquipo" required placeholder="Ejemplo: Equipo Alfa" style="display: block; margin-bottom: 15px; width: 100%; padding: 8px;" />
+
+            <fieldset>
+                <legend>Selecciona entre 1 y 4 estudiantes:</legend>
+                <div id="listaEstudiantes">
+                    <!-- Aquí se cargarán los checkboxes -->
+                    Cargando estudiantes...
+                </div>
+            </fieldset>
+
+            <button type="submit" disabled>Crear Equipo</button>
+        </form>
+
+        <p id="mensaje"></p>
+    </div>
+</main>
 
 </body>
 </html>
