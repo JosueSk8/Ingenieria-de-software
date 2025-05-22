@@ -1,25 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Perfil Administrador</title>
-    <link rel="stylesheet" href="../../css/perfil_administrador.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/Administrador/perfil_administrador.css">
 </head>
 <body>
 
-<nav>
-    <h1>Perfil Administrador</h1>
+<!-- Barra lateral -->
+<nav class="sidebar">
+    <div class="logo">
+        <i class="fas fa-user-shield fa-2x"></i>
+        <span>Perfil Admin</span>
+    </div>
+    <ul>
+        <li><a href="crearEvento.html"><i class="fas fa-calendar-plus"></i><span>Crear Evento</span></a></li>
+        <li><a href="crear_stands.html"><i class="fas fa-store"></i><span>Crear Stands</span></a></li>
+        <li><a href="administrarEstudiantes.html"><i class="fas fa-user-graduate"></i><span>Administrar Estudiantes</span></a></li>
+        <li><a href="administrarProfesores.html"><i class="fas fa-chalkboard-teacher"></i><span>Administrar Profesores</span></a></li>
+        <li><a href="administrarEvaluadores.html"><i class="fas fa-user-check"></i><span>Administrar Evaluadores</span></a></li>
+    </ul>
+    <button class="logout" onclick="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+    </button>
 </nav>
 
-<main>
-    <div id="perfil">
-        <!-- Aquí se cargarán los datos del administrador -->
-    </div>
+<!-- Contenido principal -->
+<div class="contenido">
+    <h1><i class="fas fa-id-badge"></i> Perfil del Administrador</h1>
 
-    <button onclick="cerrarSesion()">Cerrar Sesión</button>
-</main>
+    <div class="accesos-rapidos">
+        <h2>Accesos Rápidos</h2>
+        <div class="cards">
+            <a href="crearEvento.html" class="card">
+                <i class="fas fa-calendar-plus fa-2x"></i>
+                <span>Crear Evento</span>
+            </a>
+            <a href="crear_stands.html" class="card">
+                <i class="fas fa-store fa-2x"></i>
+                <span>Crear Stands</span>
+            </a>
+            <a href="administrarEstudiantes.html" class="card">
+                <i class="fas fa-user-graduate fa-2x"></i>
+                <span>Administrar Estudiantes</span>
+            </a>
+            <a href="administrarProfesores.html" class="card">
+                <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                <span>Administrar Profesores</span>
+            </a>
+            <a href="administrarEvaluadores.html" class="card">
+                <i class="fas fa-user-check fa-2x"></i>
+                <span>Administrar Evaluadores</span>
+            </a>
+        </div>
+    </div>
+</div>
 
 <script src="../../js/administrador/perfil_administrador.js"></script>
+
 </body>
 </html>
