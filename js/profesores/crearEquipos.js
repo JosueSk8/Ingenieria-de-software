@@ -6,32 +6,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function cargarEstudiantes() {
         try {
-            const res = await fetch('http://localhost:3000/estudiantes');
-            if (!res.ok) throw new Error("No se pudo cargar la lista de estudiantes");
+            // Obtener todos los estudiantes
+            const resEst = await fetch('http://localhost:3000/estudiantes');
+            if (!resEst.ok) throw new Error("No se pudo cargar la lista de estudiantes");
+            const estudiantes = await resEst.json();
 
-            const estudiantes = await res.json();
+            // Obtener todos los equipos
+            const resEq = await fetch('http://localhost:3000/equipos');
+            if (!resEq.ok) throw new Error("No se pudo cargar la lista de equipos");
+            const equipos = await resEq.json();
+
+            // Obtener IDs de estudiantes ya asignados a equipos
+            const estudiantesAsignados = new Set();
+            equipos.forEach(eq => {
+                if (Array.isArray(eq.integrantes || eq.estudiantes)) {
+                    (eq.integrantes || eq.estudiantes).forEach(id => estudiantesAsignados.add(id));
+                }
+            });
+
+            // Limpiar y mostrar solo los estudiantes disponibles
             listaEstudiantes.innerHTML = '';
+            let disponibles = 0;
 
             estudiantes.forEach(est => {
-                const div = document.createElement('div');
-                div.classList.add('checkboxEstudiante');
+                if (!estudiantesAsignados.has(est._id)) {
+                    const div = document.createElement('div');
+                    div.classList.add('checkboxEstudiante');
 
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
-                checkbox.name = 'estudiantes';
-                checkbox.value = est._id;
-                checkbox.id = `estudiante-${est._id}`;
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'estudiantes';
+                    checkbox.value = est._id;
+                    checkbox.id = `estudiante-${est._id}`;
 
-                const label = document.createElement('label');
-                label.htmlFor = checkbox.id;
-                label.textContent = est.nombre || est.nombreCompleto || "Nombre desconocido";
+                    const label = document.createElement('label');
+                    label.htmlFor = checkbox.id;
+                    label.textContent = est.nombre || est.nombreCompleto || "Nombre desconocido";
 
-                div.appendChild(checkbox);
-                div.appendChild(label);
-                listaEstudiantes.appendChild(div);
+                    div.appendChild(checkbox);
+                    div.appendChild(label);
+                    listaEstudiantes.appendChild(div);
 
-                checkbox.addEventListener('change', validarSeleccion);
+                    checkbox.addEventListener('change', validarSeleccion);
+                    disponibles++;
+                }
             });
+
+            if (disponibles === 0) {
+                listaEstudiantes.innerHTML = '<p>No hay estudiantes disponibles para asignar.</p>';
+            }
 
             validarSeleccion();
         } catch (error) {
@@ -80,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mensaje.textContent = 'Equipo creado correctamente.';
             mensaje.style.color = 'green';
             formEquipo.reset();
-            validarSeleccion();
+            cargarEstudiantes(); // recargar para reflejar cambios
         } catch (error) {
             mensaje.textContent = error.message;
             mensaje.style.color = 'red';
@@ -89,3 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cargarEstudiantes();
 });
+function cerrarSesion() {
+    window.location.href = "../index.html";
+}
