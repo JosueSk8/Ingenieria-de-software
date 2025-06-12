@@ -3,30 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Perfil del Estudiante</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script defer src="../../js/estudiantes/perfil_estudiante.js"></script>
     <link rel="stylesheet" href="../../css/perfil_estudiante.css">
-
 </head>
 <body>
 
-<!-- Barra de navegación -->
-<div class="navbar">
-    <h1>Perfil estudiante</h1>
-    <a href ="#">Inicio</a>
-    <a href ="#">Expos</a>
-    <a href ="#">Configuracion</a>
-    <button class="logout-btn" onclick="cerrarSesion()">Cerrar sesión</button>
-</div>
-
-<!-- Contenido del perfil -->
-<div class="perfil-container">
-    <h2>Perfil del Estudiante</h2>
-    <div id="perfil">
-        <p>Cargando perfil...</p>
+<!-- Barra lateral -->
+<nav class="sidebar">
+    <div class="logo">
+        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+        <span>Perfil Alumno</span>
     </div>
-</div>
+    <ul>
+        <li><a href="ver_equipo.html"><i class="fas fa-users"></i><span>Ver equipo</span></a></li>
+        <li><a href="exposicion.html"><i class="fas fa-tasks"></i><span>Exposición</span></a></li>
+        <li><a href="cartel.html" class="active"><i class="fas fa-tasks"></i><span>Cartel</span></a></li>
+    </ul>
+    <button class="logout" onclick="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+    </button>
+</nav>
 
-
-
+<!-- Contenido principal -->
+<main class="contenido">
+    <h1><i class="fas fa-id-badge"></i> Perfil del Estudiante</h1>
+    <div class="perfil-container">
+        <div id="perfil">
+            <p>Cargando perfil...</p>
+        </div>
+    </div>
+</main>
 </body>
 </html>

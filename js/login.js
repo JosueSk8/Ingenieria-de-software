@@ -16,7 +16,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
         const data = await respuesta.json();
 
         if (data.tipo === "estudiante") {
-
+            localStorage.setItem('estudianteId', data.id);
             window.location.href = `Estudiante/perfil.html?id=${data.id}`;
         } else if (data.tipo === "profesor") {
 
