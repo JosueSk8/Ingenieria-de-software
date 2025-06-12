@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Equipo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script defer src="../../js/estudiantes/ver_equipo.js"></script>
+    <link rel="stylesheet" href="../../css/perfil_estudiante.css">
+</head>
+<body>
+
+<nav class="sidebar">
+    <div class="logo">
+        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+        <span>Perfil Alumno</span>
+    </div>
+    <ul>
+        <li><a href="ver_equipo.html" class="active"><i class="fas fa-users"></i><span>Ver equipo</span></a></li>
+        <li><a href="exposicion.html"><i class="fas fa-tasks"></i><span>Exposición</span></a></li>
+        <li><a href="cartel.html"><i class="fas fa-tasks"></i><span>Cartél</span></a></li>
+    </ul>
+    <button class="logout" onclick="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
+    </button>
+</nav>
+
+<main class="contenido">
+    <h1><i class="fas fa-users"></i> Mi Equipo</h1>
+    <div class="perfil-container" id="equipo">
+        <p>Cargando datos del equipo...</p>
+    </div>
+</main>
+
+</body>
+</html>
