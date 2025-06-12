@@ -1,11 +1,11 @@
-/* Fondo general con gradiente animado */
+/* Fondo oscuro animado estilo Expo ESCOM */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e53d9 0%, #1874d0 25%, #cc0d95 50%, #a1c4fd 75%, #c2ffd8 100%);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
+    background: linear-gradient(-45deg, #1d1238, #2c0d4e, #3c1d89, #1d1238);
+    background-size: 300% 300%;
+    animation: gradientAnimation 18s ease infinite;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -21,12 +21,12 @@ body {
 
 /* Contenedor del formulario */
 .registro-container {
-    background-color: #ffffffdd;
+    background-color: #ffffff1a;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px rgba(255, 203, 5, 0.25);
     width: 420px;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
     animation: fadeIn 0.6s ease-in-out;
     transition: transform 0.3s ease;
 }
@@ -44,7 +44,7 @@ body {
 h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #333;
+    color: #ffcb05;
     font-size: 26px;
     position: relative;
 }
@@ -62,34 +62,36 @@ label {
     display: block;
     margin-top: 15px;
     font-weight: 600;
-    color: #444;
+    color: #eee;
     font-size: 15px;
 }
 
-/* Campos de entrada */
-input {
+/* Entradas */
+input, select {
     width: 100%;
     padding: 12px;
     margin-top: 5px;
     border: 1.5px solid #ccc;
     border-radius: 10px;
     font-size: 14px;
+    background-color: #fdfdfd;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus {
-    border-color: #7f7fd5;
-    box-shadow: 0 0 5px rgba(127, 127, 213, 0.4);
+input:focus,
+select:focus {
+    border-color: #ffcb05;
+    box-shadow: 0 0 6px rgba(255, 203, 5, 0.5);
     outline: none;
 }
 
-/* Botón de envío */
+/* Botón */
 button {
     margin-top: 30px;
     width: 100%;
     padding: 14px;
-    background: linear-gradient(to right, #667eea, #764ba2);
-    color: white;
+    background: linear-gradient(to right, #ffcb05, #f29c1f);
+    color: #1d1238;
     border: none;
     border-radius: 10px;
     font-size: 16px;
@@ -99,6 +101,6 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(to right, #5a67d8, #6b46c1);
-    transform: translateY(-1px);
+    background: linear-gradient(to right, #f2b705, #ffcb05);
+    transform: translateY(-2px);
 }

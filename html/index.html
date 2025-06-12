@@ -5,20 +5,23 @@
     <title>Expos Escom</title>
     <link rel="stylesheet" href="../css/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <script src="../js/index.js"></script>
 </head>
 <body>
 
 <!-- Navbar -->
 <div class="navbar">
     <div class="leftSide">
-        <img src="../assets/logoESCOM.png" alt="Logo ESCOM">
+    <a href="index.html">
+        <img src="../assets/logoESCOM2.png" alt="Logo ESCOM">
+    </a>
     </div>
+
     <div class="rightSide">
         <a href="login.html">Iniciar Sesión</a>
         <a href="registro.html">Registrarse</a>
-        <a href="#">Calendario</a>
-        <a href="#">Acerca de</a>
-        <a href="#">Contacto</a>
+        <a href="calendario.html">Calendario</a>
+        <a href="acerca_de.html">Acerca de</a>
     </div>
 </div>
 
@@ -32,7 +35,19 @@
         </p>
     </div>
     <div class="imagen">
-        <img id="escom" src="../assets/escom_main.jpg" alt="ESCOM">
+        <div class="carousel">
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                    <li class="carousel-slide"><img src="../assets/escom_main.jpg" alt="ESCOM 1" /></li>
+                    <li class="carousel-slide"><img src="../assets/escom_2.png" alt="ESCOM 2" /></li>
+                    <li class="carousel-slide"><img src="../assets/escom_3.png" alt="ESCOM 3" /></li>
+                    <li class="carousel-slide"><img src="../assets/escom_4.png" alt="ESCOM 4" /></li>
+                    <li class="carousel-slide"><img src="../assets/escom_5.png" alt="ESCOM 5" /></li>
+                </ul>
+            </div>
+            <button class="carousel-button prev">‹</button>
+            <button class="carousel-button next">›</button>
+        </div>
     </div>
 </main>
 
@@ -41,7 +56,7 @@
     <div class="socialMedia">
         <!-- Aquí puedes poner íconos de redes sociales si quieres -->
     </div>
-    <p>&copy; 2025 exposEscom.com</p>
+    <p>&copy; 2025 expoEscom.com</p>
 </div>
 
 </body>

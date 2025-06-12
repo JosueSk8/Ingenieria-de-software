@@ -1,33 +1,33 @@
-/* Fondo con gradiente animado */
+/* Fondo oscuro animado estilo Expo ESCOM */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #2152ce, #66a6ff, #fbc2eb, #a18cd1);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
+    background: linear-gradient(-45deg, #1d1238, #2c0d4e, #3c1d89, #1d1238);
+    background-size: 300% 300%;
+    animation: gradientAnimation 18s ease infinite;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Animación de fondo */
+/* Animación del fondo */
 @keyframes gradientAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Contenedor principal */
+/* Contenedor del registro de roles */
 .rol-container {
-    background-color: #ffffffdd;
+    background-color: #ffffff1a;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px rgba(255, 203, 5, 0.25);
     width: 360px;
     text-align: center;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(8px);
     animation: fadeIn 0.6s ease-in-out;
 }
 
@@ -39,11 +39,11 @@ body {
 
 h2 {
     font-size: 24px;
-    color: #333;
+    color: #ffcb05;
     margin-bottom: 30px;
 }
 
-/* Botones de rol */
+/* Formulario y botones */
 form {
     margin-bottom: 15px;
 }
@@ -51,8 +51,8 @@ form {
 button {
     width: 100%;
     padding: 14px;
-    background: linear-gradient(to right, #667eea, #764ba2);
-    color: white;
+    background: linear-gradient(to right, #ffcb05, #f29c1f);
+    color: #1d1238;
     border: none;
     border-radius: 10px;
     font-size: 16px;
@@ -62,6 +62,6 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(to right, #5a67d8, #6b46c1);
-    transform: translateY(-1px);
+    background: linear-gradient(to right, #f2b705, #ffcb05);
+    transform: translateY(-2px);
 }
