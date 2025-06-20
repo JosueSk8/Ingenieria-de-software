@@ -124,6 +124,166 @@ function generarRutasCRUD(app, db, nombreColeccion) {
                 res.status(500).send(`Error al eliminar ${nombreColeccion}`);
             });
     });
+    // Ruta personalizada para obtener equipo por ID de estudiante (solo para colección 'equipos')
+    if (nombreColeccion === 'equipos') {
+        app.get('/equipos/estudiante/:idEstudiante', async (req, res) => {
+            const idEstudiante = req.params.idEstudiante;
+            if (!ObjectId.isValid(idEstudiante)) {
+                return res.status(400).send('ID de estudiante inválido');
+            }
+
+            try {
+                console.log('Buscando equipo con estudiante ID:', idEstudiante);
+
+                // Buscar equipo que tenga ese estudiante
+                const equipo = await db.collection('equipos').findOne({
+                    estudiantes: { $elemMatch: { $eq: idEstudiante } }
+                });
+
+                if (!equipo) {
+                    return res.status(404).send('El estudiante no está asignado a ningún equipo');
+                }
+
+                // Obtener datos completos de los estudiantes del equipo
+                const estudiantesIds = equipo.estudiantes.map(id => new ObjectId(id));
+                const estudiantes = await db.collection('estudiantes')
+                    .find({ _id: { $in: estudiantesIds } })
+                    .project({ nombre: 1 })
+                    .toArray();
+
+                equipo.estudiantes = estudiantes;
+
+                res.json(equipo);
+            } catch (err) {
+                console.error(err);
+                res.status(500).send('Error al obtener el equipo del estudiante');
+            }
+        });
+
+        // Ruta para registrar un proyecto a un equipo
+        app.post('/equipos/:equipoId/proyecto', async (req, res) => {
+            const equipoId = req.params.equipoId;
+            const { nombre, descripcion, repositorio } = req.body;
+
+            if (!ObjectId.isValid(equipoId)) {
+                return res.status(400).send('ID de equipo inválido');
+            }
+
+            try {
+                const equipo = await db.collection('equipos').findOne({ _id: new ObjectId(equipoId) });
+
+                if (!equipo) {
+                    return res.status(404).send('Equipo no encontrado');
+                }
+
+                if (equipo.proyecto) {
+                    return res.status(409).send('Ya existe un proyecto registrado para este equipo');
+                }
+
+                await db.collection('equipos').updateOne(
+                    { _id: new ObjectId(equipoId) },
+                    { $set: { proyecto: { nombre, descripcion, repositorio } } }
+                );
+
+                res.send('Proyecto registrado exitosamente');
+            } catch (err) {
+                console.error(err);
+                res.status(500).send('Error al registrar el proyecto');
+            }
+        });
+        // Ruta para actualizar proyecto de un equipo
+        app.put('/equipos/:equipoId/proyecto', async (req, res) => {
+            const equipoId = req.params.equipoId;
+            const { nombre, descripcion, repositorio } = req.body;
+
+            if (!ObjectId.isValid(equipoId)) {
+                return res.status(400).send('ID de equipo inválido');
+            }
+
+            try {
+                const equipo = await db.collection('equipos').findOne({ _id: new ObjectId(equipoId) });
+
+                if (!equipo) {
+                    return res.status(404).send('Equipo no encontrado');
+                }
+
+                await db.collection('equipos').updateOne(
+                    { _id: new ObjectId(equipoId) },
+                    { $set: { proyecto: { nombre, descripcion, repositorio } } }
+                );
+
+                res.send('Proyecto actualizado exitosamente');
+            } catch (err) {
+                console.error(err);
+                res.status(500).send('Error al actualizar el proyecto');
+            }
+        });
+
+
+    }
+
+    const path = require('path');
+    const fs = require('fs');
+    const multer = require('multer');
+
+    if (nombreColeccion === 'estudiantes') {
+
+        app.get('/cartel', (req, res) => {
+            // Ajusta la ruta a tu estructura real del proyecto:
+            const filePath = path.join(__dirname, '..', 'assets', 'cartel.docx');
+
+            if (fs.existsSync(filePath)) {
+                res.download(filePath, 'cartel.docx');
+            } else {
+                res.status(404).send('Cartel no encontrado');
+            }
+        });
+
+        const uploadDir = path.join(__dirname, '..', 'assets', 'cartelesA');
+
+        // Asegúrate que esta carpeta ya exista manualmente
+
+        const storage = multer.diskStorage({
+            destination: function (req, file, cb) {
+                cb(null, uploadDir);
+            },
+            filename: function (req, file, cb) {
+                const equipoId = req.params.equipoId;
+                cb(null, `${equipoId}.docx`);
+            }
+        });
+
+        const upload = multer({storage});
+
+        // Ruta POST que verifica antes de guardar
+        app.post('/cartel/subir/:equipoId', async (req, res) => {
+            const equipoId = req.params.equipoId;
+            if (!equipoId || equipoId === 'undefined') {
+                return res.status(400).send('ID de equipo inválido');
+            }
+
+            const filePath = path.join(uploadDir, `${equipoId}.docx`);
+
+            // Validación antes de usar multer
+            if (fs.existsSync(filePath)) {
+                return res.status(409).send('Ya existe un cartel para este equipo');
+            }
+
+            // Ejecuta multer una vez que pasamos la validación
+            upload.single('cartel')(req, res, (err) => {
+                if (err) {
+                    console.error('Error al subir el archivo:', err);
+                    return res.status(500).send('Error al subir el cartel');
+                }
+
+                if (!req.file) {
+                    return res.status(400).send('No se recibió ningún archivo');
+                }
+
+                res.send('Cartel subido con éxito');
+            });
+        });
+    }
 }
 
 module.exports = generarRutasCRUD;

@@ -16,10 +16,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         const estudiante = await res.json();
 
         document.getElementById('perfil').innerHTML = `
-            <p><strong>Nombre:</strong> ${estudiante.nombre}</p></td>
-            <p><strong>Correo:</strong> ${estudiante.correo}</p>
-            <p><strong>Carrera:</strong> ${estudiante.carrera}</p>
+            <h2>Información del estudiante:</h2><br>
+            <div class="perfil-dato">
+                <strong>Nombre:</strong>
+                <p>${estudiante.nombre}</p>
+            </div>
+            <div class="perfil-dato">
+                <strong>Correo:</strong>
+                <p>${estudiante.correo}</p>
+            </div>
+            <div class="perfil-dato">
+                <strong>Carrera:</strong>
+                <p>${estudiante.carrera}</p>
+            </div>
         `;
+
     } catch (error) {
         document.getElementById('perfil').innerHTML = `<p>Error al cargar el perfil: ${error.message}</p>`;
     }
