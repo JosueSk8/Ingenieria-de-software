@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-      <html lang="es">
-      <head>
-      <meta charset="UTF-8">
-      <title>Administrar Evaluadores</title>
+  <meta charset="UTF-8">
+  <title>Crear Evento</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../../css/Administrador/administrarEvaluadores.css">
+  <link rel="stylesheet" href="../../css/Administrador/crear_evento.css">
 </head>
 <body>
 
@@ -34,29 +30,28 @@
 </nav>
 
 <div class="contenido">
-  <h1>Administrar Evaluadores</h1>
-  <table id="tablaEvaluadores">
-    <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Área</th>
-      <th>Correo</th>
-      <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <h1>Crear Evento</h1>
+
+  <form id="formEvento">
+    <label for="nombre">Nombre del Evento:</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="fechaInicio">Fecha de Inicio:</label>
+    <input type="date" id="fechaInicio" name="fechaInicio" required>
+
+    <label for="fechaFin">Fecha de Finalización:</label>
+    <input type="date" id="fechaFin" name="fechaFin" required>
+
+    <label for="horaInicio">Hora de Comienzo:</label>
+    <input type="time" id="horaInicio" name="horaInicio" required>
+
+    <button type="submit">Registrar Evento</button>
+  </form>
+
+  <div id="resultado"></div>
 </div>
 
-<script src="../../js/administrador/administrarEvaluadores.js">
-
-</script>
-
-</body>
-</html>
-</title>
-</head>
-<body>
+<script src="../../js/administrador/crear_evento.js"></script>
 
 </body>
 </html>

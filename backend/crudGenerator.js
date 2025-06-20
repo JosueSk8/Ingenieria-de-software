@@ -58,6 +58,71 @@ function generarRutasCRUD(app, db, nombreColeccion) {
             res.status(500).send("Error en el servidor");
         }
     });
+    // ruta para crear los stands
+    app.post('/stands/create', async (req, res) => {
+        const { edificio, mesa } = req.body;
+
+        try {
+            const existente = await db.collection('stands').findOne({ edificio, mesa });
+            if (existente) return res.status(409).send('Ya existe');
+
+            await db.collection('stands').insertOne({ edificio, mesa });
+            res.status(201).send('Stand creado');
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Error en servidor');
+        }
+    });
+    app.post('/eventos/create', async (req, res) => {
+        const { nombre, fechaInicio, fechaFin, horaInicio } = req.body;
+
+        if (!nombre || !fechaInicio || !fechaFin || !horaInicio) {
+            return res.status(400).send("Datos incompletos");
+        }
+
+        try {
+            await db.collection('eventos').insertOne({
+                nombre,
+                fechaInicio,
+                fechaFin,
+                horaInicio,
+                creado: new Date()
+            });
+
+            res.status(201).send("Evento creado");
+        } catch (err) {
+            console.error(err);
+            res.status(500).send("Error al registrar el evento");
+        }
+    });
+    app.put('/eventos/:id', async (req, res) => {
+        const id = req.params.id;
+        const { nombre, fechaInicio, fechaFin, horaInicio } = req.body;
+
+        try {
+            const result = await db.collection('eventos').updateOne(
+                { _id: new ObjectId(id) },
+                {
+                    $set: {
+                        nombre,
+                        fechaInicio,
+                        fechaFin,
+                        horaInicio
+                    }
+                }
+            );
+
+            if (result.matchedCount === 0) {
+                return res.status(404).send("Evento no encontrado");
+            }
+
+            res.send("Evento actualizado");
+        } catch (err) {
+            console.error(err);
+            res.status(500).send("Error al actualizar evento");
+        }
+    });
+
 
 
 

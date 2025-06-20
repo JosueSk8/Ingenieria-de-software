@@ -20,6 +20,8 @@ conexionDB()
         generarRutasCRUD(app,db,'evaluadores');
         generarRutasCRUD(app,db,'administradores');
         generarRutasCRUD(app,db,'equipos');
+        generarRutasCRUD(app,db,'stands');
+        generarRutasCRUD(app,db,'eventos');
 
         // Iniciar el servidor
         app.listen(puerto, () => {

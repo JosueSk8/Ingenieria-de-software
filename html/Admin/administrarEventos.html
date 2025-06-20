@@ -1,14 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-      <html lang="es">
-      <head>
-      <meta charset="UTF-8">
-      <title>Administrar Evaluadores</title>
+  <meta charset="UTF-8">
+  <title>Administrar Eventos</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../../css/Administrador/administrarEvaluadores.css">
+  <link rel="stylesheet" href="../../css/Administrador/administrarEvento.css">
 </head>
 <body>
 
@@ -26,7 +22,6 @@
     <li><a href="administrarProfesores.html"><i class="fas fa-chalkboard-teacher"></i><span>Administrar Profesores</span></a></li>
     <li><a href="administrarEvaluadores.html"><i class="fas fa-user-check"></i><span>Administrar Evaluadores</span></a></li>
   </ul>
-
   <button class="logout" onclick="cerrarSesion()">
     <i class="fas fa-sign-out-alt"></i>
     <span>Cerrar Sesión</span>
@@ -34,13 +29,15 @@
 </nav>
 
 <div class="contenido">
-  <h1>Administrar Evaluadores</h1>
-  <table id="tablaEvaluadores">
+  <h1>Administrar Eventos</h1>
+
+  <table id="tablaEventos">
     <thead>
     <tr>
       <th>Nombre</th>
-      <th>Área</th>
-      <th>Correo</th>
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th>Hora</th>
       <th>Acciones</th>
     </tr>
     </thead>
@@ -48,15 +45,7 @@
   </table>
 </div>
 
-<script src="../../js/administrador/administrarEvaluadores.js">
-
-</script>
-
-</body>
-</html>
-</title>
-</head>
-<body>
+<script src="../../js/administrador/administrarEventos.js"></script>
 
 </body>
 </html>
