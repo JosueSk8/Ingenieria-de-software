@@ -219,6 +219,26 @@ function generarRutasCRUD(app, db, nombreColeccion) {
             }
         });
 
+        app.delete('/equipos/:equipoId/proyecto', async (req, res) => {
+            const equipoId = req.params.equipoId;
+            if (!ObjectId.isValid(equipoId)) {
+                return res.status(400).send('ID inválido');
+            }
+
+            try {
+                const result = await db.collection('equipos').updateOne(
+                    { _id: new ObjectId(equipoId) },
+                    { $unset: { proyecto: "", calificacion: "", comentario: "" } }
+                );
+
+                res.send('Proyecto eliminado');
+            } catch (err) {
+                console.error(err);
+                res.status(500).send('Error al eliminar proyecto');
+            }
+        });
+
+
 
     }
 
@@ -284,6 +304,99 @@ function generarRutasCRUD(app, db, nombreColeccion) {
             });
         });
     }
+
+    if (nombreColeccion === 'evaluadores') {
+        app.get('/evaluador/equipos-proyectos', async (req, res) => {
+            try {
+                const equipos = await db.collection('equipos').find().toArray();
+
+                const equiposConProyecto = await Promise.all(equipos.map(async (equipo) => {
+                    // Obtener datos de los integrantes
+                    const estudiantes = await db.collection('estudiantes')
+                        .find({ _id: { $in: equipo.estudiantes.map(id => new ObjectId(id)) } })
+                        .project({ nombre: 1 })
+                        .toArray();
+
+                    return {
+                        _id: equipo._id,
+                        nombre: equipo.nombre,
+                        integrantes: estudiantes.map(e => e.nombre),
+                        proyecto: equipo.proyecto || null, // <-- Aquí accedemos directamente
+                        calificacion: equipo.calificacion || '',
+                        comentario: equipo.comentario || ''
+                    };
+                }));
+
+                res.json(equiposConProyecto);
+            } catch (error) {
+                console.error('Error en /evaluador/equipos-proyectos:', error);
+                res.status(500).send('Error al obtener los equipos');
+            }
+        });
+
+
+
+
+        app.put('/evaluador/calificar/:equipoId', async (req, res) => {
+            const equipoId = req.params.equipoId;
+            const { calificacion, comentario, evaluadorId } = req.body;
+
+            if (!ObjectId.isValid(equipoId)) {
+                return res.status(400).send('ID de equipo inválido');
+            }
+
+            try {
+                await db.collection('equipos').updateOne(
+                    { _id: new ObjectId(equipoId) },
+                    { $set: { calificacion, comentario, evaluadorId } }
+                );
+                res.send('Calificación y comentario guardados');
+            } catch (err) {
+                console.error(err);
+                res.status(500).send('Error al guardar la calificación');
+            }
+        });
+    }
+    app.delete('/evaluador/calificar/:equipoId', async (req, res) => {
+        const equipoId = req.params.equipoId;
+
+        if (!ObjectId.isValid(equipoId)) {
+            return res.status(400).send('ID de equipo inválido');
+        }
+
+        try {
+            await db.collection('equipos').updateOne(
+                { _id: new ObjectId(equipoId) },
+                { $unset: { calificacion: "", comentario: "", evaluadorId: "" } }
+            );
+            res.send('Evaluación eliminada');
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Error al eliminar evaluación');
+        }
+    });
+
+    // Ruta sencilla
+    app.get('/evaluadores/:id', async (req, res) => {
+        const { id } = req.params;
+
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send('ID inválido');
+        }
+
+        try {
+            const evaluador = await db.collection('evaluadores').findOne({ _id: new ObjectId(id) });
+
+            if (!evaluador) return res.status(404).send('Evaluador no encontrado');
+
+            res.json({ nombre: evaluador.nombre });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Error al obtener el evaluador');
+        }
+    });
+
+
 }
 
 module.exports = generarRutasCRUD;

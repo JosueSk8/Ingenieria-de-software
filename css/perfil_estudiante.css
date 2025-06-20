@@ -308,6 +308,18 @@ html, body {
     transition: background-color 0.2s ease;
 }
 
+.btn-eliminar {
+    background-color: firebrick;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
 .btn-editar:hover,
 .btn-actualizar:hover {
     background-color: #0056b3;

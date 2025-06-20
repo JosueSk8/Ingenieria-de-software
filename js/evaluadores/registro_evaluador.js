@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Evaluador registrado exitosamente.');
 
                 // Redirigimos a la página de perfil del evaluador
+                localStorage.setItem('evaluadorId', data.id);
                 window.location.href = `../html/Evaluador/perfil.html?id=${evaluadorId}`;
             } else {
                 const err = await res.json();

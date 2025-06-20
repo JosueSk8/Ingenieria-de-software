@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const params = new URLSearchParams(window.location.search);
-    const evaluadorId = params.get('id');
+    const evaluadorId = localStorage.getItem('evaluadorId')
 
     if (!evaluadorId) {
         document.getElementById('perfil').innerHTML = "<p>Error: ID de evaluador no proporcionado.</p>";

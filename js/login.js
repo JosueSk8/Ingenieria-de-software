@@ -22,7 +22,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
 
             window.location.href = `Profesor/perfil.html?id=${data.id}`;
         } else if (data.tipo === "evaluador") {
-
+            localStorage.setItem('evaluadorId', data.id);
             window.location.href = `Evaluador/perfil.html?id=${data.id}`;
         } else if (data.tipo === "administrador") {
 

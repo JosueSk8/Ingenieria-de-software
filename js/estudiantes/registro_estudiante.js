@@ -27,12 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Verificamos la respuesta del servidor
             if (res.ok) {
                 const data = await res.json();  // Esperamos la respuesta del servidor
-                const studentId = data.id;  // Obtenemos el ID del nuevo estudiante
+                const estudianteId = data.id;  // Obtenemos el ID del nuevo estudiante
 
                 alert('Estudiante registrado exitosamente.');
-
+                localStorage.setItem('estudianteId', data.id);
                 // Redirigimos a la página del perfil del estudiante
-                window.location.href = `../../html/Estudiante/perfil.html`;
+                window.location.href = `../../html/Estudiante/perfil.html?id=${estudianteId}`;
 
             } else {
                 alert('Error al registrar el estudiante.');
