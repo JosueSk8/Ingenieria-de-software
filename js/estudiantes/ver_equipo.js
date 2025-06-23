@@ -33,18 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             contenedorEquipo.innerHTML = `
-                <div class="equipo-card">
-                    <h2>Nombre del equipo: </h2><br>
-                    <p class="equipo-nombre">${equipo.nombre}</p>
-                    <h3>Integrantes:</h3><br>
-                    <div class="integrantes-lista">
-                        ${integrantes.map(est => `
-                            <div class="card integrante-card">
-                                <p>${est.nombre}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
+                <h2>Nombre del equipo: ${equipo.nombre}</h2>
+                <h3>Integrantes:</h3>
+                <ul>
+                    ${integrantes.map(est => `<li>${est.nombre}</li>`).join('')}
+                </ul>
             `;
 
         } catch (error) {

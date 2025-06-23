@@ -24,25 +24,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         const equipoId = equipo._id;
 
         cartelContainer.innerHTML = `
-            
-            <input type="file" id="cartelInput" class="file-input">
+  <div class="card-foto" style="padding: 15px; margin-bottom: 20px;">
+    <input type="file" id="cartelInput" class="file-input" />
+  </div>
 
-            <div class="button-container">
-                <button class="custom-button download-button" onclick="descargarCartel()">
-                    <i class="fas fa-download"></i> Descargar plantilla
-                </button>
+  <div class="button-container" style="display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; max-width: 500px; margin: 0 auto;">
+    <button class="custom-button download-button" onclick="descargarCartel()">
+      <i class="fas fa-download"></i> Descargar plantilla
+    </button>
 
-                <div class="upload-group">
-                    <button class="custom-button select-button" id="seleccionarArchivoBtn">
-                        <i class="fas fa-upload"></i> Seleccionar archivo
-                    </button>
+    <div class="upload-group" style="display: flex; gap: 10px;">
+      <button class="custom-button select-button" id="seleccionarArchivoBtn">
+        <i class="fas fa-upload"></i> Seleccionar archivo
+      </button>
 
-                    <button class="custom-button upload-button d-none" id="subirCartelBtn">
-                        <i class="fas fa-check"></i> Subir Cartel
-                    </button>
-                </div>
-            </div>
-        `;
+      <button class="custom-button upload-button d-none" id="subirCartelBtn">
+        <i class="fas fa-check"></i> Subir Cartel
+      </button>
+    </div>
+  </div>
+`;
+
 
         // Eventos después de crear elementos dinámicos
         const seleccionarBtn = document.getElementById('seleccionarArchivoBtn');

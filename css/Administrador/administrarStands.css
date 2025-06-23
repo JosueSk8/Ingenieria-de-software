@@ -1,121 +1,166 @@
 @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    background-color: #f4f4f4;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #1d1238, #2c0d4e, #3c1d89, #1d1238);
+  background-size: 300% 300%;
+  animation: gradientAnimation 18s ease infinite;
+  color: #fff;
 }
 
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sidebar */
 .sidebar {
-    width: 220px;
-    background-color: #2c3e50;
-    color: white;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(255, 203, 5, 0.2);
 }
 
 .logo {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .logo i {
-    display: block;
-    font-size: 2rem;
-    margin-bottom: 5px;
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 5px;
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 10px 20px;
+  list-style: none;
+  padding: 0;
+  width: 100%;
 }
 
 .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: rgba(255, 203, 5, 0.2);
+  color: #ffcb05;
 }
 
 .sidebar ul li a i {
-    margin-right: 10px;
-}
-
-.sidebar ul li a:hover {
-    background-color: #34495e;
-    border-radius: 5px;
+  margin-right: 10px;
 }
 
 .logout {
-    margin: 20px;
-    padding: 10px;
-    background-color: #e74c3c;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  width: 90%;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 .logout:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
+/* Contenido */
 .contenido {
-    flex-grow: 1;
-    padding: 30px;
+  flex-grow: 1;
+  padding: 40px;
+  overflow-x: auto;
 }
 
-h1 {
-    text-align: center;
-    color: #2c3e50;
+.contenido h1 {
+  color: #ffcb05;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px #000000aa;
 }
 
+/* Tabla moderna */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 30px;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(255, 203, 5, 0.2);
 }
 
 th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  padding: 16px;
+  text-align: left;
+  color: #f0e68c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 th {
-    background-color: #34495e;
-    color: white;
+  background-color: rgba(255, 203, 5, 0.2);
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #00000077;
 }
 
 tr:hover {
-    background-color: #f1f1f1;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
+/* Botón eliminar */
 button.btn-eliminar {
-    padding: 6px 12px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(255, 203, 5, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 button.btn-eliminar:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contenido {
+    padding: 20px;
+  }
+
+  table, th, td {
+    font-size: 0.9rem;
+  }
+
+  button.btn-eliminar {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }

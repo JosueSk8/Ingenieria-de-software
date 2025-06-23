@@ -16,10 +16,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const profesor = await res.json();
 
-        document.getElementById('perfil').innerHTML = `
-            <p><strong>Nombre:</strong> ${profesor.nombre}</p>
-            <p><strong>Correo:</strong> ${profesor.correo}</p>
-            <p><strong>Departamento:</strong> ${profesor.departamento}</p>
+        const fotoUrl = profesor.foto || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+        perfil.innerHTML = `
+            <div class="card-foto">
+                <img src="${fotoUrl}" alt="Foto del estudiante">
+                <p>${profesor.nombre}</p>
+            </div>
+            <div class="card-perfil"><i class="fas fa-user"></i><span><strong>Nombre:</strong> ${profesor.nombre}</span></div>
+            <div class="card-perfil"><i class="fas fa-envelope"></i><span><strong>Correo:</strong> ${profesor.correo}</span></div>
         `;
     } catch (error) {
         document.getElementById('perfil').innerHTML = `<p>Error al cargar el perfil: ${error.message}</p>`;

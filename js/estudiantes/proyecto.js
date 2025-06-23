@@ -150,28 +150,41 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
                 // Mostrar formulario para registrar nuevo proyecto
                 container.innerHTML = `
-        <div class="proyecto-container">
-            <h3 class="titulo-proyecto">Registrar nuevo proyecto</h3>
-            <form id="formProyecto">
-                <div class="proyecto-campo">
-                    <label class="form-label">Nombre del proyecto:</label>
-                    <input type="text" id="nombre" class="form-control" required>
-                </div>
+    <div class="card-foto">
+        <i class="fas fa-folder-plus fa-3x"></i>
+        <p>Registrar nuevo proyecto</p>
+    </div>
 
-                <div class="proyecto-campo">
-                    <label class="form-label">Descripción:</label>
-                    <textarea id="descripcion" class="form-control" rows="4" required></textarea>
-                </div>
+    <form id="formProyecto" class="form-proyecto">
+        <div class="form-campos">
+            <div class="card-perfil">
+                <i class="fas fa-file-signature"></i>
+                <span><strong>Nombre del proyecto:</strong></span>
+                <input type="text" id="nombre" class="form-control" required>
+            </div>
 
-                <div class="proyecto-campo">
-                    <label class="form-label">Repositorio:</label>
-                    <input type="url" id="repositorio" class="form-control" required>
-                </div>
+            <div class="card-perfil">
+                <i class="fas fa-align-left"></i>
+                <span><strong>Descripción:</strong></span>
+                <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+            </div>
 
-                <button type="submit" class="btn-actualizar">Registrar Proyecto</button>
-            </form>
+            <div class="card-perfil">
+                <i class="fas fa-code-branch"></i>
+                <span><strong>Repositorio:</strong></span>
+                <input type="url" id="repositorio" class="form-control" required>
+            </div>
         </div>
-    `;
+
+        <div class="form-btn-container">
+            <button type="submit" class="btn-actualizar">
+                <i class="fas fa-paper-plane"></i> Registrar Proyecto
+            </button>
+        </div>
+    </form>
+`;
+
+
 
                 const form = document.getElementById('formProyecto');
                 form.addEventListener('submit', async (e) => {

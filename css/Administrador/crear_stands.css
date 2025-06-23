@@ -1,147 +1,261 @@
-* {
-    box-sizing: border-box;
-}
+/* crear_stands.css */
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    display: flex;
-    background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #1d1238, #2c0d4e, #3c1d89, #1d1238);
+  background-size: 300% 300%;
+  animation: gradientAnimation 18s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  color: #fff;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .sidebar {
-    width: 220px;
-    background-color: #2c3e50;
-    color: white;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
+  width: 250px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(255, 203, 5, 0.2);
 }
 
-.logo {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+.sidebar .logo {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.logo i {
-    display: block;
-    font-size: 2rem;
-    margin-bottom: 5px;
+.sidebar .logo i {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffcb05;
+  font-size: 2rem;
+}
+
+.sidebar .logo span {
+  font-weight: bold;
+  color: white;
 }
 
 .sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 10px 20px;
+  list-style: none;
+  padding: 0;
+  width: 100%;
 }
 
 .sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.3s;
+  border-radius: 5px;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li a.active {
+  background-color: rgba(255, 203, 5, 0.2);
+  color: #ffcb05;
 }
 
 .sidebar ul li a i {
-    margin-right: 10px;
-}
-
-.sidebar ul li a:hover {
-    background-color: #34495e;
-    border-radius: 5px;
+  margin-right: 10px;
+  font-size: 1.2rem;
 }
 
 .logout {
-    margin: 20px;
-    padding: 10px;
-    background-color: #e74c3c;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  width: 90%;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
 }
 
 .logout:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
 .contenido {
-    flex-grow: 1;
-    padding: 30px;
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
+  max-width: 900px;
+  margin: auto;
 }
 
-h1 {
-    text-align: center;
-    color: #2c3e50;
+.contenido h1 {
+  font-size: 2.4rem;
+  color: #ffcb05;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 4px #000000aa;
+  text-align: center;
 }
 
+/* Formulario */
 form {
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffff1a;
+  backdrop-filter: blur(6px);
+  padding: 30px 35px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(255, 203, 5, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+form:hover {
+  box-shadow: 0 12px 32px rgba(255, 203, 5, 0.5);
 }
 
 form label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #34495e;
+  display: block;
+  margin-top: 15px;
+  font-weight: 700;
+  color: #ffcb05;
+  font-size: 1.1rem;
 }
 
 form select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border-radius: 12px;
+  border: 1px solid #ffcb05aa;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333; /* texto oscuro para mejor legibilidad */
+  background-color: #fff; /* fondo blanco para desplegable visible */
+  appearance: none; /* quitar flecha default */
+  transition: border-color 0.3s ease;
 }
 
+form select:focus {
+  border-color: #ffcb05;
+  outline: none;
+  box-shadow: 0 0 10px #ffcb05aa;
+}
+
+
 form button {
-    display: block;
-    width: 100%;
-    margin-top: 25px;
-    background-color: #2980b9;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  background-color: #ffcb05;
+  color: #1d1238;
+  padding: 14px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(255, 203, 5, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 form button:hover {
-    background-color: #2471a3;
+  background-color: #e6b800;
+  box-shadow: 0 7px 20px rgba(230, 184, 0, 0.7);
 }
 
+/* Resultado / mensaje */
 #resultado {
-    margin-top: 20px;
-    text-align: center;
-    font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #ffcb05;
 }
 
+/* Mapa */
 .mapa {
-    max-width: 800px;
-    margin: 50px auto 20px;
-    text-align: center;
+  max-width: 800px;
+  margin: 50px auto 20px;
+  text-align: center;
 }
 
 .mapa h2 {
-    margin-bottom: 15px;
-    color: #2c3e50;
+  margin-bottom: 20px;
+  color: #ffcb05;
+  font-weight: 700;
+  font-size: 1.6rem;
 }
 
 .imagen-mapa {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 0 20px rgba(255, 203, 5, 0.3);
+  border: 2px solid #ffcb05aa;
+  transition: box-shadow 0.3s ease;
+}
+
+.imagen-mapa:hover {
+  box-shadow: 0 0 30px rgba(255, 203, 5, 0.6);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
     width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .sidebar .logo {
+    display: none;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sidebar ul li a {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .logout {
+    margin: 10px;
+    width: auto;
+  }
+
+  .contenido {
+    padding: 20px;
+  }
+
+  form {
     max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    border: 2px solid #ccc;
+    padding: 25px 20px;
+  }
+
+  .mapa {
+    margin: 30px 10px 20px;
+  }
 }
