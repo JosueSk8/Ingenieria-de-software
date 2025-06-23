@@ -11,6 +11,34 @@ function generarRutasCRUD(app, db, nombreColeccion) {
             });
     });
 
+    if (nombreColeccion === 'estudiantes') {
+
+        // ✅ Primero, ruta específica
+        app.get('/estudiantes/verificar', async (req, res) => {
+            const { correo, boleta } = req.query;
+
+            try {
+                const existeCorreo = correo
+                    ? await db.collection('estudiantes').findOne({ correo: correo.toLowerCase().trim() })
+                    : null;
+
+                const existeBoleta = boleta
+                    ? await db.collection('estudiantes').findOne({ boleta: boleta.trim() })
+                    : null;
+
+                res.json({
+                    correoRegistrado: !!existeCorreo,
+                    boletaRegistrada: !!existeBoleta
+                });
+            } catch (error) {
+                console.error('Error al verificar estudiante:', error);
+                res.status(500).send('Error en verificación');
+            }
+        });
+        
+    }
+
+
     //  Ruta para obtener un documento por ID (necesaria para ver el perfil)
     app.get(`/${nombreColeccion}/:id`, async (req, res) => {
         const id = req.params.id;
@@ -368,6 +396,7 @@ function generarRutasCRUD(app, db, nombreColeccion) {
                 res.send('Cartel subido con éxito');
             });
         });
+
     }
 
     if (nombreColeccion === 'evaluadores') {
