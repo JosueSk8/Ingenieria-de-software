@@ -5,12 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault(); // Evitamos el envío tradicional
 
         // Obtenemos los valores del formulario
-        const profesor = {
-            nombre: document.getElementById('nombre').value,
-            departamento: document.getElementById('departamento').value,
-            correo: document.getElementById('correo').value,
-            contrasena: document.getElementById('contrasena').value
-        };
+        const nombre = document.getElementById('nombre').value.trim();
+        const departamento = document.getElementById('departamento').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        const contrasena = document.getElementById('contrasena').value.trim();
+
+        const correoRegex = /^[a-zA-Z0-9._%+-]+@escom\.ipn\.mx$/;
+
+        if (!correoRegex.test(correo)) {
+            alert('El correo debe ser institucional (terminar en @escom.ipn.mx)');
+            return;
+        }
+
+        const profesor = { nombre, departamento, correo, contrasena };
 
         try {
             const res = await fetch('http://localhost:3000/profesores/create', {
@@ -23,11 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (res.ok) {
                 const data = await res.json();
-                const profesorId = data.id; // Suponemos que la API devuelve el id del profesor
+                const profesorId = data.id;
 
                 alert('Profesor registrado exitosamente.');
 
-                // Redirigimos a la página de perfil del profesor
                 window.location.href = `../html/Profesor/perfil.html?id=${profesorId}`;
             } else {
                 const err = await res.json();

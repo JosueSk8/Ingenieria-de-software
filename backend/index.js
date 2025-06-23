@@ -10,6 +10,8 @@ const puerto = 3000;
 // Middleware para habilitar CORS y parsear JSON
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 // Conectar a la base de datos y luego crear las rutas CRUD
 conexionDB()
