@@ -7,19 +7,26 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 tabla.innerHTML = "";
                 data.forEach(evento => {
-                    const fila = document.createElement("tr");
-                    fila.innerHTML = `
-                        <td contenteditable="true" data-campo="nombre">${evento.nombre}</td>
-                        <td><input type="date" value="${evento.fechaInicio}" data-campo="fechaInicio"></td>
-                        <td><input type="date" value="${evento.fechaFin}" data-campo="fechaFin"></td>
-                        <td><input type="time" value="${evento.horaInicio}" data-campo="horaInicio"></td>
-                        <td>
-                            <button class="btn-guardar" onclick="guardarCambios('${evento._id}', this)">Guardar</button>
-                            <button class="btn-eliminar" onclick="eliminarEvento('${evento._id}')">Eliminar</button>
-                        </td>
-                    `;
-                    tabla.appendChild(fila);
-                });
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+        <td contenteditable="true" data-campo="nombre" data-label="Nombre">${evento.nombre}</td>
+        <td data-label="Fecha Inicio">
+            <input type="date" value="${evento.fechaInicio}" data-campo="fechaInicio">
+        </td>
+        <td data-label="Fecha Fin">
+            <input type="date" value="${evento.fechaFin}" data-campo="fechaFin">
+        </td>
+        <td data-label="Hora">
+            <input type="time" value="${evento.horaInicio}" data-campo="horaInicio">
+        </td>
+        <td data-label="Acciones">
+            <button class="btn-editar" onclick="guardarCambios('${evento._id}', this)">Guardar</button>
+            <button class="btn-eliminar" onclick="eliminarEvento('${evento._id}')">Eliminar</button>
+        </td>
+    `;
+    tabla.appendChild(fila);
+});
+
             })
             .catch(err => console.error("Error al cargar eventos:", err));
     }

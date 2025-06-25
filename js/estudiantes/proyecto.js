@@ -25,70 +25,98 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
         if (equipo.proyecto) {
-            const { nombre, descripcion, repositorio } = equipo.proyecto;
-            const calificacion = equipo.calificacion ?? 'No calificado';
-            const comentario = equipo.comentario ?? 'Sin comentarios';
+    const { nombre, descripcion, repositorio } = equipo.proyecto;
+    const calificacion = equipo.calificacion ?? 'No calificado';
+    const comentario = equipo.comentario ?? 'Sin comentarios';
 
-            container.innerHTML = `
-    <div class="proyecto-container">
+    // Obtener info del stand si está asignado
+    let infoStand = 'No asignado';
+    if (equipo.standId) {
+        try {
+            const resStand = await fetch(`http://localhost:3000/stands/${equipo.standId}`);
+            if (resStand.ok) {
+                const stand = await resStand.json();
+                infoStand = stand.ubicacion || `Edificio ${stand.edificio} - Mesa ${stand.mesa}`;
+            }
+        } catch (err) {
+            console.error('Error al obtener info del stand', err);
+            infoStand = 'Error al obtener información del stand';
+        }
+    }
+
+    container.innerHTML = `
         <h3 class="titulo-proyecto">Proyecto registrado</h3>
 
-        <div class="proyecto-campo">
-            <h4>Nombre del Proyecto:</h4>
-            <p>${nombre}</p>
+        <div class="card-perfil">
+          <i class="fas fa-file-signature"></i>
+          <span><strong>Nombre del Proyecto:</strong> ${nombre}</span>
         </div>
 
-        <div class="proyecto-campo">
-            <h4>Descripción:</h4>
-            <p>${descripcion}</p>
+        <div class="card-perfil">
+          <i class="fas fa-align-left"></i>
+          <span><strong>Descripción:</strong> ${descripcion}</span>
         </div>
 
-        <div class="proyecto-campo">
-            <h4>Repositorio:</h4>
-            <p><a href="${repositorio}" target="_blank">${repositorio}</a></p>
-        </div>
-        
-        <div class="proyecto-campo">
-            <h4>Nombre del evaluador:</h4>
-            <p>${nombreEvaluador}</p>
+        <div class="card-perfil">
+          <i class="fas fa-code-branch"></i>
+          <span><strong>Repositorio:</strong> <a href="${repositorio}" target="_blank" style="color: #ffcb05;">${repositorio}</a></span>
         </div>
 
-        <div class="proyecto-campo">
-            <h4>Calificación del evaluador:</h4>
-            <p>${calificacion}</p>
+        <div class="card-perfil">
+          <i class="fas fa-user-check"></i>
+          <span><strong>Evaluador:</strong> ${nombreEvaluador}</span>
         </div>
 
-        <div class="proyecto-campo">
-            <h4>Comentario del evaluador:</h4>
-            <p>${comentario}</p>
+        <div class="card-perfil">
+          <i class="fas fa-map-marker-alt"></i>
+          <span><strong>Stand asignado:</strong> ${infoStand}</span>
         </div>
 
-        <button id="btnEditar" class="btn-editar">Editar Proyecto</button>
-
-        <div id="formEditar" class="formulario-edicion d-none">
-            <form id="formProyecto">
-                <div class="proyecto-campo">
-                    <label class="form-label">Nombre del proyecto:</label>
-                    <input type="text" id="nombre" value="${nombre}" class="form-control" required>
-                </div>
-
-                <div class="proyecto-campo">
-                    <label class="form-label">Descripción:</label>
-                    <textarea id="descripcion" class="form-control" rows="4" required>${descripcion}</textarea>
-                </div>
-
-                <div class="proyecto-campo">
-                    <label class="form-label">Repositorio:</label>
-                    <input type="url" id="repositorio" value="${repositorio}" class="form-control" required>
-                </div>
-
-                <button type="submit" class="btn-actualizar">Actualizar Proyecto</button>
-                <button type="button" id="btnEliminar" class="btn-eliminar">Eliminar Proyecto</button>
-
-            </form>
+        <div class="card-perfil">
+          <i class="fas fa-star"></i>
+          <span><strong>Calificación:</strong> ${calificacion}</span>
         </div>
-    </div>
-    `;
+
+        <div class="card-perfil">
+          <i class="fas fa-comment"></i>
+          <span><strong>Comentario:</strong> ${comentario}</span>
+        </div>
+
+  <div class="form-btn-container">
+    <button id="btnEditar" class="custom-button"><i class="fas fa-edit"></i> Editar Proyecto</button>
+  </div>
+
+  <div id="formEditar" class="formulario-edicion d-none">
+    <form id="formProyecto" class="form-proyecto">
+      <div class="form-campos">
+        <div class="card-perfil">
+          <i class="fas fa-file-signature"></i>
+          <span><strong>Nombre:</strong></span>
+          <input type="text" id="nombre" value="${nombre}" class="form-control" required>
+        </div>
+
+        <div class="card-perfil">
+          <i class="fas fa-align-left"></i>
+          <span><strong>Descripción:</strong></span>
+          <textarea id="descripcion" class="form-control" rows="3" required>${descripcion}</textarea>
+        </div>
+
+        <div class="card-perfil">
+          <i class="fas fa-code-branch"></i>
+          <span><strong>Repositorio:</strong></span>
+          <input type="url" id="repositorio" value="${repositorio}" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-btn-container">
+        <button type="submit" class="btn-actualizar"><i class="fas fa-sync-alt"></i> Actualizar</button>
+        <button type="button" id="btnEliminar" class="btn-eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
+      </div>
+    </form>
+  </div>
+`;
+
+
 
             const btnEditar = document.getElementById('btnEditar');
             const formEditar = document.getElementById('formEditar');

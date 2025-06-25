@@ -531,3 +531,53 @@ body {
     justify-content: center;
   }
 }
+#equipoSelect {
+    background-color: rgba(0, 0, 0, 0.6); /* fondo semitransparente oscuro */
+    color: #ffcb05; /* texto amarillo dorado */
+    border: 1px solid #ffcb05;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    appearance: none; /* elimina estilos nativos en algunos navegadores */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+/* Opcional: Estilo para las opciones dentro del select */
+#equipoSelect option {
+    background-color: #1d1238; /* fondo oscuro para opciones */
+    color: #ffcb05; /* texto amarillo */
+}
+
+/* Para que el dropdown no pierda color en Firefox */
+#equipoSelect:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #ffcb05;
+}
+#standSelect {
+    background-color: rgba(0, 0, 0, 0.6); /* fondo semitransparente oscuro */
+    color: #ffcb05; /* texto amarillo dorado */
+    border: 1px solid #ffcb05;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    appearance: none; /* elimina estilos nativos */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+/* Opciones del select */
+#standSelect option {
+    background-color: #1d1238;
+    color: #ffcb05;
+}
+
+/* Para Firefox, que no pierda color al enfocar */
+#standSelect:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #ffcb05;
+}

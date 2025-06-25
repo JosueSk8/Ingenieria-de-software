@@ -18,14 +18,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         const fotoUrl = estudiante.foto || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
 
         perfil.innerHTML = `
-            <div class="card-foto">
-                <img src="${fotoUrl}" alt="Foto del estudiante">
-                <p>${estudiante.nombre}</p>
-            </div>
-            <div class="card-perfil"><i class="fas fa-user"></i><span><strong>Nombre:</strong> ${estudiante.nombre}</span></div>
-            <div class="card-perfil"><i class="fas fa-envelope"></i><span><strong>Correo:</strong> ${estudiante.correo}</span></div>
-            <div class="card-perfil"><i class="fas fa-graduation-cap"></i><span><strong>Carrera:</strong> ${estudiante.carrera}</span></div>
-        `;
+  <div class="card-foto">
+    <img src="${fotoUrl}" alt="Foto del estudiante">
+    <p>${estudiante.nombre}</p>
+  </div>
+  <div class="card-perfil"><i class="fas fa-user"></i><span><strong>Nombre:</strong> ${estudiante.nombre}</span></div>
+  <div class="card-perfil"><i class="fas fa-envelope"></i><span><strong>Correo:</strong> ${estudiante.correo}</span></div>
+  <div class="card-perfil"><i class="fas fa-graduation-cap"></i><span><strong>Carrera:</strong> ${estudiante.carrera}</span></div>
+`;
+
+
+
 
     } catch (error) {
         document.getElementById('perfil').innerHTML = `<p>Error al cargar el perfil: ${error.message}</p>`;

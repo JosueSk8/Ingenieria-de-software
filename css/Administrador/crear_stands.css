@@ -174,6 +174,22 @@ form button:hover {
   background-color: #e6b800;
   box-shadow: 0 7px 20px rgba(230, 184, 0, 0.7);
 }
+form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: inset 0 0 6px rgba(255, 203, 5, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+form input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+}
 
 /* Resultado / mensaje */
 #resultado {
@@ -258,4 +274,24 @@ form button:hover {
   .mapa {
     margin: 30px 10px 20px;
   }
+}
+form select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #000; /* texto negro */
+  background-color: #fff; /* fondo blanco */box-shadow: inset 0 0 6px rgba(255, 203, 5, 0.2);
+  backdrop-filter: blur(4px);
+  appearance: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form select:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px #ffcb05aa;
 }
