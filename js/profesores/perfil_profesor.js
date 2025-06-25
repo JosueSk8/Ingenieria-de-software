@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
-    const profesorId = params.get('id');
+    const profesorId = localStorage.getItem('profesorId');
 
     if (!profesorId) {
         document.getElementById('perfil').innerHTML = "<p>Error: ID de profesor no proporcionado.</p>";

@@ -19,7 +19,7 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
             localStorage.setItem('estudianteId', data.id);
             window.location.href = `Estudiante/perfil.html?id=${data.id}`;
         } else if (data.tipo === "profesor") {
-
+            localStorage.setItem('profesorId', data.id);
             window.location.href = `Profesor/perfil.html?id=${data.id}`;
         } else if (data.tipo === "evaluador") {
             localStorage.setItem('evaluadorId', data.id);
