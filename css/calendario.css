@@ -189,3 +189,31 @@ body {
         margin: 15px 10px;
     }
 }
+.event-day {
+  background-color: #ffcb05;
+  color: #1d1238;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ffcb05aa;
+}
+
+
+.event-tooltip {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  background-color: #333;
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.event-day:hover .event-tooltip {
+  opacity: 1;
+}

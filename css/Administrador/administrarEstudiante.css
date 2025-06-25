@@ -62,7 +62,7 @@ body {
 .sidebar ul li a {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 12px 10px;
   color: white;
   text-decoration: none;
   font-weight: 500;
@@ -153,20 +153,22 @@ tbody td {
 }
 
 td[contenteditable="true"] {
-  background-color: #fff;
-  color: #222;
-  border: 1px dashed transparent;
-  border-radius: 5px;
-  padding: 12px 15px;
-  transition: border-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-weight: 500;
+  box-shadow: inset 0 0 6px rgba(255, 203, 5, 0.2);
+  transition: all 0.3s ease;
 }
 
 td[contenteditable="true"]:focus {
   outline: none;
-  border-color: #ffcb05;
-  background-color: #fffde7;
-  box-shadow: 0 0 5px #ffcb05aa;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px #ffcb05aa;
 }
+
+/* Botones */
 
 button {
   padding: 8px 14px;
@@ -233,4 +235,33 @@ button {
   table, thead th, tbody td {
     font-size: 0.9rem;
   }
+}
+
+/* Estilos para inputs */
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: inset 0 0 6px rgba(255, 203, 5, 0.2);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px #ffcb05aa;
+  border: 1px solid #ffcb05;
+  color: #fff;
 }

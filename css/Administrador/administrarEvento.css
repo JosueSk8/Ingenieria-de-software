@@ -54,7 +54,7 @@ body {
 .sidebar ul li a {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 12px 10px;
   color: white;
   text-decoration: none;
   transition: background 0.3s;
@@ -163,3 +163,123 @@ button.btn-eliminar:hover {
     font-size: 0.9rem;
   }
 }
+/* Botones de acción en tabla */
+td .btn-editar,
+td .btn-eliminar {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-right: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 203, 5, 0.2);
+}
+
+.btn-editar {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #2980b9;
+  transform: scale(1.05);
+}
+
+/* Ya tienes esto pero se mejora un poco */
+.btn-eliminar {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-eliminar:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+/* Adaptación para mobile */
+@media screen and (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  td {
+    padding: 10px 15px;
+    position: relative;
+    text-align: left;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    font-weight: bold;
+    color: #ffcb05;
+  }
+
+  td .btn-editar,
+  td .btn-eliminar {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+input[type="date"],
+input[type="time"] {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #ffcb05;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 8px rgba(255, 203, 5, 0.1);
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+input[type="date"]:hover,
+input[type="time"]:hover,
+input[type="date"]:focus,
+input[type="time"]:focus {
+  border-color: #ffd700;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+/* Cambiar botón azul a verde para guardar */
+
+td .btn-guardar,
+td .btn-editar {
+  display: inline-block;
+  padding: 8px 14px;
+  margin-right: 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 203, 5, 0.2);
+  background-color: #27ae60;
+  color: white;
+}
+
+td .btn-guardar:hover,
+td .btn-editar:hover {
+  background-color: #229954;
+  /* eliminé transform scale para igualar botones */
+  /* transform: scale(1.05); */
+}
+
+/* Botón eliminar ya está definido */

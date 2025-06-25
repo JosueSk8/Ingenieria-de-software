@@ -31,25 +31,33 @@
     <h1><i class="fas fa-tasks"></i> Administrar Equipos</h1>
     <div class="perfil-container">
         <form id="formEditarEquipo">
-            <label for="equipoSelect">Selecciona un equipo:</label>
-            <select id="equipoSelect" required></select>
+    <label for="equipoSelect">Selecciona un equipo:</label>
+    <select id="equipoSelect" required></select>
 
-            <label for="nombreEquipo">Nuevo nombre del equipo:</label>
-            <input type="text" id="nombreEquipo" name="nombreEquipo" required style="display: block; margin-bottom: 15px; width: 100%; padding: 8px;" />
+    <label for="nombreEquipo">Nuevo nombre del equipo:</label>
+    <input type="text" id="nombreEquipo" name="nombreEquipo" required style="display: block; margin-bottom: 15px; width: 100%; padding: 8px;" />
 
-            <fieldset>
-                <legend>Agregar o quitar integrantes:</legend>
-                <div id="listaEstudiantes">
-                    <!-- Aquí se cargarán los checkboxes -->
-                    Cargando estudiantes...
-                </div>
-            </fieldset>
+    <fieldset>
+        <legend>Agregar o quitar integrantes:</legend>
+        <div id="listaEstudiantes">
+            <!-- Aquí se cargarán los checkboxes -->
+            Cargando estudiantes...
+        </div>
+    </fieldset>
 
-            <button type="submit">Guardar Cambios</button>
-            <button type="button" id="eliminarEquipo" style="margin-left: 10px;">Eliminar equipo</button>
-        </form>
+    <label for="standSelect">Asignar Stand al equipo:</label>
+    <select id="standSelect" name="standSelect" style="width: 100%; padding: 8px; margin-bottom: 15px; border-radius: 8px; border: none; background-color: rgba(255, 203, 5, 0.1); color: #ffcb05;">
+        <option value="">-- Selecciona un stand --</option>
+        <!-- Opciones dinámicas se agregarán aquí -->
+    </select>
 
-        <p id="mensaje"></p>
+    <div class="botones-edicion">
+        <button type="submit">Guardar cambios</button>
+        <button id="eliminarEquipo" type="button">Eliminar equipo</button>
+    </div>
+</form>
+
+<p id="mensaje"></p>
     </div>
 </main>
 

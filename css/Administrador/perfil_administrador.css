@@ -114,10 +114,11 @@ body {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  justify-items: center;
+  grid-template-columns: repeat(3, 1fr); /* Fuerza 3 columnas */
+  gap: 24px;
+  justify-items: stretch;
 }
+
 
 .card-acceso {
   background-color: #ffffff1a;
@@ -132,6 +133,15 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  height: 180px; /* Mismo alto para todas */
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2.5rem; /* Todos del mismo tamaño */
+  color: #ffcb05;
 }
 
 .card-acceso i {
