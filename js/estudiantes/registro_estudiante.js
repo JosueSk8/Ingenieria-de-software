@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await res.json();
                 alert('Estudiante registrado exitosamente.');
                 localStorage.setItem('estudianteId', data.id);
-                window.location.href = `../../../html/Estudiante/perfil.html?id=${data.id}`;
+                window.location.href = `../html/Estudiante/perfil.html?id=${data.id}`;
             } else {
                 alert('Error al registrar el estudiante.');
             }

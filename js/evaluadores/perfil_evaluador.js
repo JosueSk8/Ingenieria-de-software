@@ -1,43 +1,36 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form'); // Obtenemos el formulario
+document.addEventListener('DOMContentLoaded', async () => {
+    const params = new URLSearchParams(window.location.search);
+    const evaluadorId = localStorage.getItem('evaluadorId');
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Evitamos el envío tradicional
+    if (!evaluadorId) {
+        document.getElementById('perfil').innerHTML = "<p>Error: ID de evaluador no proporcionado.</p>";
+        return;
+    }
 
-        // Obtenemos los valores del formulario
-        const evaluador = {
-            nombre: document.getElementById('nombre').value,
-            area: document.getElementById('area').value,
-            correo: document.getElementById('correo').value,
-            contrasena: document.getElementById('contrasena').value
-        };
+    try {
+        const res = await fetch(`http://localhost:3000/evaluadores/${evaluadorId}`);
 
-        try {
-            const res = await fetch('http://localhost:3000/evaluadores/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(evaluador)
-            });
-
-            if (res.ok) {
-                const data = await res.json();
-                const evaluadorId = data.id;
-
-                alert('Evaluador registrado exitosamente.');
-
-                // Redirigimos a la página de perfil del evaluador
-                localStorage.setItem('evaluadorId', data.id);
-                window.location.href = `../html/Evaluador/perfil.html?id=${evaluadorId}`;
-            } else {
-                const err = await res.json();
-                alert(`Error: ${err.message || 'No se pudo registrar el evaluador.'}`);
-            }
-
-        } catch (error) {
-            console.error('Error al registrar evaluador:', error);
-            alert('No se pudo conectar con el servidor.');
+        if (!res.ok) {
+            throw new Error("No se pudo cargar el perfil");
         }
-    });
+
+        const evaluador = await res.json();
+
+        const fotoUrl = evaluador.foto || "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+
+        perfil.innerHTML = `
+            <div class="card-foto">
+                <img src="${fotoUrl}" alt="Foto del estudiante">
+                <p>${evaluador.nombre}</p>
+            </div>
+            <div class="card-perfil"><i class="fas fa-user"></i><span><strong>Nombre:</strong> ${evaluador.nombre}</span></div>
+           <!-- <div class="card-perfil"><i class="fas fa-envelope"></i><span><strong>Correo:</strong> ${evaluador.correo}</span></div>-->
+        `;
+    } catch (error) {
+        document.getElementById('perfil').innerHTML = `<p>Error al cargar el perfil: ${error.message}</p>`;
+    }
 });
+
+function cerrarSesion() {
+    window.location.href = "../index.html";
+}
